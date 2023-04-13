@@ -1,0 +1,13 @@
+{% load menu %}
+{% for cat in cats %}
+    <details {% if cat.url in open_cats %} open {% endif %}>
+        <summary>
+            <a href="{{ cat.get_full_url }}">{{ cat.name }}</a>
+        </summary>
+        {% if cat.get_children %}
+            {% for child in cat.get_children %}
+                {% draw_menu child.id open_cats %}
+            {% endfor %}
+        {% endif %}
+    </details>
+{% endfor %}
